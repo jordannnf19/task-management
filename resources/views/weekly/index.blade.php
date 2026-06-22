@@ -68,7 +68,6 @@
                     <th>Project</th>
                     <th>Priority</th>
                     <th>Hours</th>
-                    <th>Status</th>
                     <th>Submitted</th>
                     <th>Action</th>
                 </tr>
@@ -123,24 +122,14 @@
                         </div>
                     </td>
                     <td>
-                        @php
-                            $sClass = match($report->project_status) {
-                                'Completed' => 'badge-completed',
-                                'On Track'  => 'badge-in-progress',
-                                'Delayed'   => 'badge-pending',
-                                'At Risk'   => 'badge-high',
-                                'On Hold'   => 'badge-hold',
-                                default     => 'badge-hold',
-                            };
-                        @endphp
-                        <span class="badge status-badge {{ $sClass }}">{{ $report->project_status }}</span>
-                    </td>
-                    <td>
                         <span style="font-size: 12px; color: var(--muted);">
                             {{ $report->created_at->format('d M Y') }}
                         </span>
                     </td>
                     <td>
+                        <a href="{{ route('weekly.show', $report->id) }}" class="btn btn-light btn-sm">
+                            View
+                        </a>
                         <a href="{{ route('weekly.edit', $report->id) }}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-fill"></i>
                             Edit

@@ -80,41 +80,41 @@
                     <label class="form-label">Project Name</label>
                     <input type="text" class="form-control readonly-field"
                            name="reports[{{ $key }}][project_name]"
-                           value="{{ $week['project_name'] }}" readonly>
+                           value="{{ $week['project_name'] }}" readonly required>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Priority</label>
                     <input type="text" class="form-control readonly-field"
                            name="reports[{{ $key }}][project_priority]"
-                           value="{{ $week['project_priority'] }}" readonly>
+                           value="{{ $week['project_priority'] }}" readonly required>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Deadline</label>
                     <input type="date" class="form-control readonly-field"
                            name="reports[{{ $key }}][deadline_date]"
-                           value="{{ $week['deadline_date'] }}" readonly>
+                           value="{{ $week['deadline_date'] }}" readonly required>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Est. Hours</label>
                     <input type="number" step="0.01" class="form-control readonly-field"
                            name="reports[{{ $key }}][estimated_hours]"
-                           value="{{ $week['estimated_hours'] }}" readonly>
+                           value="{{ $week['estimated_hours'] }}" readonly required>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Hours Worked</label>
                     <input type="number" step="0.01" class="form-control readonly-field"
                            name="reports[{{ $key }}][actual_hours_worked]"
-                           value="{{ $week['actual_hours_worked'] }}" readonly>
+                           value="{{ $week['actual_hours_worked'] }}" readonly required>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Activities Completed</label>
                     <textarea class="form-control readonly-field" rows="3"
-                              name="reports[{{ $key }}][activities_completed]" readonly>{{ $week['activities_completed'] }}</textarea>
+                              name="reports[{{ $key }}][activities_completed]" readonly required>{{ $week['activities_completed'] }}</textarea>
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Plan for Next Week</label>
                     <textarea class="form-control readonly-field" rows="3"
-                              name="reports[{{ $key }}][plan_for_next_week]" readonly>{{ $week['plan_for_next_week'] }}</textarea>
+                              name="reports[{{ $key }}][plan_for_next_week]" readonly required>{{ $week['plan_for_next_week'] }}</textarea>
                 </div>
             </div>
         </div>
@@ -136,6 +136,7 @@
                               name="reports[{{ $key }}][issues_faced]"
                               placeholder="Describe any blockers or challenges..."
                               maxlength="1000"
+                              required
                               oninput="countW(this, 'if{{ $key }}')"></textarea>
                     <div class="char-count"><span id="if{{ $key }}">0</span> / 1000</div>
                 </div>
@@ -148,6 +149,7 @@
                               name="reports[{{ $key }}][client_feedback]"
                               placeholder="Any feedback received from the client..."
                               maxlength="500"
+                              required
                               oninput="countW(this, 'cf{{ $key }}')"></textarea>
                     <div class="char-count"><span id="cf{{ $key }}">0</span> / 500</div>
                 </div>
@@ -160,6 +162,7 @@
                               name="reports[{{ $key }}][learning_update]"
                               placeholder="Skills learned or knowledge gained..."
                               maxlength="500"
+                              required
                               oninput="countW(this, 'lu{{ $key }}')"></textarea>
                     <div class="char-count"><span id="lu{{ $key }}">0</span> / 500</div>
                 </div>
@@ -172,6 +175,7 @@
                               name="reports[{{ $key }}][key_outcomes]"
                               placeholder="Key deliverables or results achieved..."
                               maxlength="500"
+                              required
                               oninput="countW(this, 'ko{{ $key }}')"></textarea>
                     <div class="char-count"><span id="ko{{ $key }}">0</span> / 500</div>
                 </div>
@@ -184,6 +188,7 @@
                               name="reports[{{ $key }}][additional_notes]"
                               placeholder="Any other notes or observations..."
                               maxlength="500"
+                              required
                               oninput="countW(this, 'an{{ $key }}')"></textarea>
                     <div class="char-count"><span id="an{{ $key }}">0</span> / 500</div>
                 </div>
@@ -194,7 +199,7 @@
                         <i class="bi bi-flag"></i>
                         Project Status
                     </label>
-                    <select class="form-select" name="reports[{{ $key }}][project_status]">
+                    <select class="form-select" name="reports[{{ $key }}][project_status]" required>
                         @foreach(['On Track', 'At Risk', 'Delayed', 'Completed', 'On Hold'] as $s)
                         <option value="{{ $s }}" {{ $week['project_status'] === $s ? 'selected' : '' }}>
                             {{ $s }}

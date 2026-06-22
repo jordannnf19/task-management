@@ -127,7 +127,8 @@
                                   rows="4"
                                   placeholder="Describe any blockers, challenges, or issues you encountered..."
                                   maxlength="1000"
-                                  oninput="countEdit(this, 'ife')">{{ $weekly->issues_faced }}</textarea>
+                                  required
+                                  oninput="countEdit(this, 'ife')">{{ old('issues_faced', $weekly->issues_faced) }}</textarea>
                         <div class="char-count"><span id="ife">{{ strlen($weekly->issues_faced ?? '') }}</span> / 1000</div>
                     </div>
 
@@ -142,7 +143,8 @@
                                   rows="4"
                                   placeholder="Any feedback, comments, or direction received from the client..."
                                   maxlength="500"
-                                  oninput="countEdit(this, 'cfe')">{{ $weekly->client_feedback }}</textarea>
+                                  required
+                                  oninput="countEdit(this, 'cfe')">{{ old('client_feedback', $weekly->client_feedback) }}</textarea>
                         <div class="char-count"><span id="cfe">{{ strlen($weekly->client_feedback ?? '') }}</span> / 500</div>
                     </div>
 
@@ -157,8 +159,25 @@
                                   rows="4"
                                   placeholder="New skills acquired, tools learned, or knowledge gained this week..."
                                   maxlength="500"
-                                  oninput="countEdit(this, 'lue')">{{ $weekly->learning_update }}</textarea>
+                                  required
+                                  oninput="countEdit(this, 'lue')">{{ old('learning_update', $weekly->learning_update) }}</textarea>
                         <div class="char-count"><span id="lue">{{ strlen($weekly->learning_update ?? '') }}</span> / 500</div>
+                    </div>
+
+                    {{-- Key Outcomes --}}
+                    <div>
+                        <label class="form-label">
+                            <i class="bi bi-trophy text-primary"></i>
+                            Key Outcomes
+                        </label>
+                        <textarea name="key_outcomes"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Key deliverables or results achieved..."
+                                  maxlength="500"
+                                  required
+                                  oninput="countEdit(this, 'koe')">{{ old('key_outcomes', $weekly->key_outcomes) }}</textarea>
+                        <div class="char-count"><span id="koe">{{ strlen($weekly->key_outcomes ?? '') }}</span> / 500</div>
                     </div>
 
                     {{-- Additional Notes --}}
@@ -172,7 +191,8 @@
                                   rows="3"
                                   placeholder="Any other relevant notes, observations, or comments..."
                                   maxlength="500"
-                                  oninput="countEdit(this, 'ane')">{{ $weekly->additional_notes }}</textarea>
+                                  required
+                                  oninput="countEdit(this, 'ane')">{{ old('additional_notes', $weekly->additional_notes) }}</textarea>
                         <div class="char-count"><span id="ane">{{ strlen($weekly->additional_notes ?? '') }}</span> / 500</div>
                     </div>
 

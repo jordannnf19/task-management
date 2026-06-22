@@ -23,6 +23,17 @@
 
 </form>
 
+@if(now()->hour < 21)
+<form action="{{ route('daily.send-email') }}" method="POST" class="mt-3">
+    @csrf
+    <button type="submit" class="btn btn-success">
+        <i class="bi bi-envelope-fill"></i>
+        Send Email
+    </button>
+    <span style="font-size: 12px; color: var(--muted); margin-left: 8px;">Visible until 9 PM only.</span>
+</form>
+@endif
+
 <script>
 (function () {
     var taskCount = 0;
@@ -57,7 +68,7 @@
                         '<label class="form-label"><i class="bi bi-folder2"></i> Project Name</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-folder"></i>' +
-                            '<input type="text" name="tasks[' + n + '][project_name]" class="form-control" placeholder="e.g. Website Redesign" oninput="updateTaskLabel(' + n + ', this.value)">' +
+                            '<input type="text" name="tasks[' + n + '][project_name]" class="form-control" placeholder="e.g. Website Redesign" required oninput="updateTaskLabel(' + n + ', this.value)">' +
                         '</div>' +
                     '</div>' +
 
@@ -65,7 +76,7 @@
                         '<label class="form-label"><i class="bi bi-check2-square"></i> Task Name</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-pencil"></i>' +
-                            '<input type="text" name="tasks[' + n + '][task_name]" class="form-control" placeholder="Describe the task">' +
+                            '<input type="text" name="tasks[' + n + '][task_name]" class="form-control" placeholder="Describe the task" required>' +
                         '</div>' +
                     '</div>' +
 
@@ -73,7 +84,7 @@
                         '<label class="form-label"><i class="bi bi-flag"></i> Priority</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-flag"></i>' +
-                            '<select name="tasks[' + n + '][priority]" class="form-select">' +
+                            '<select name="tasks[' + n + '][priority]" class="form-select" required>' +
                                 '<option value="High">🔴 High</option>' +
                                 '<option value="Medium" selected>🟡 Medium</option>' +
                                 '<option value="Low">🟢 Low</option>' +
@@ -85,7 +96,7 @@
                         '<label class="form-label"><i class="bi bi-calendar-event"></i> Start Date</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-calendar"></i>' +
-                            '<input type="date" name="tasks[' + n + '][start_date]" class="form-control" value="' + today + '">' +
+                            '<input type="date" name="tasks[' + n + '][start_date]" class="form-control" value="' + today + '" required>' +
                         '</div>' +
                     '</div>' +
 
@@ -93,7 +104,7 @@
                         '<label class="form-label"><i class="bi bi-calendar-check"></i> End Date</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-calendar2-check"></i>' +
-                            '<input type="date" name="tasks[' + n + '][end_date]" class="form-control" value="' + today + '">' +
+                            '<input type="date" name="tasks[' + n + '][end_date]" class="form-control" value="' + today + '" required>' +
                         '</div>' +
                     '</div>' +
 
@@ -101,7 +112,7 @@
                         '<label class="form-label"><i class="bi bi-hourglass-split"></i> Est. Hours</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-hourglass"></i>' +
-                            '<input type="number" step="0.5" min="0" name="tasks[' + n + '][estimated_hours]" class="form-control" placeholder="0.0">' +
+                            '<input type="number" step="0.5" min="0" name="tasks[' + n + '][estimated_hours]" class="form-control" placeholder="0.0" required>' +
                         '</div>' +
                     '</div>' +
 
@@ -109,7 +120,7 @@
                         '<label class="form-label"><i class="bi bi-stopwatch"></i> Hours Spent</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-stopwatch"></i>' +
-                            '<input type="number" step="0.5" min="0" name="tasks[' + n + '][hours_spent]" class="form-control" placeholder="0.0">' +
+                            '<input type="number" step="0.5" min="0" name="tasks[' + n + '][hours_spent]" class="form-control" placeholder="0.0" required>' +
                         '</div>' +
                     '</div>' +
 
@@ -117,7 +128,7 @@
                         '<label class="form-label"><i class="bi bi-activity"></i> Status</label>' +
                         '<div class="input-icon-wrap">' +
                             '<i class="bi bi-circle-half"></i>' +
-                            '<select name="tasks[' + n + '][status]" class="form-select">' +
+                            '<select name="tasks[' + n + '][status]" class="form-select" required>' +
                                 '<option value="Completed">✅ Completed</option>' +
                                 '<option value="In Progress" selected>🔄 In Progress</option>' +
                                 '<option value="Pending">⏳ Pending</option>' +
@@ -128,13 +139,13 @@
 
                     '<div class="col-12">' +
                         '<label class="form-label"><i class="bi bi-journal-text"></i> Current Progress</label>' +
-                        '<textarea name="tasks[' + n + '][current_progress]" class="form-control" rows="3" placeholder="Describe what was accomplished today..." maxlength="1000" oninput="countChars(this, \'cp' + n + '\')"></textarea>' +
+                        '<textarea name="tasks[' + n + '][current_progress]" class="form-control" rows="3" placeholder="Describe what was accomplished today..." maxlength="1000" required oninput="countChars(this, \'cp' + n + '\')"></textarea>' +
                         '<div class="char-count"><span id="cp' + n + '">0</span> / 1000</div>' +
                     '</div>' +
 
                     '<div class="col-12">' +
                         '<label class="form-label"><i class="bi bi-arrow-right-circle"></i> Tomorrow\'s Plan</label>' +
-                        '<textarea name="tasks[' + n + '][tomorrows_plan]" class="form-control" rows="3" placeholder="What will you work on tomorrow?" maxlength="1000" oninput="countChars(this, \'tp' + n + '\')"></textarea>' +
+                        '<textarea name="tasks[' + n + '][tomorrows_plan]" class="form-control" rows="3" placeholder="What will you work on tomorrow?" maxlength="1000" required oninput="countChars(this, \'tp' + n + '\')"></textarea>' +
                         '<div class="char-count"><span id="tp' + n + '">0</span> / 1000</div>' +
                     '</div>' +
 

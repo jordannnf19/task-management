@@ -60,6 +60,18 @@ Route::middleware('auth')->group(function () {
         [DailyUpdateController::class, 'history'])
         ->name('daily.history');
 
+    Route::post('/daily-updates/send-email', [DailyUpdateController::class, 'sendEmail'])
+        ->name('daily.send-email');
+
+    Route::get('/daily-updates/{id}', [DailyUpdateController::class, 'show'])
+        ->name('daily.show');
+
+    Route::get('/daily-updates/{id}/edit', [DailyUpdateController::class, 'edit'])
+        ->name('daily.edit');
+
+    Route::put('/daily-updates/{id}', [DailyUpdateController::class, 'update'])
+        ->name('daily.update');
+
     /*
     |--------------------------------------------------------------------------
     | Weekly Updates
@@ -77,6 +89,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/weekly-updates/edit/{id}',
         [WeeklyUpdateController::class, 'edit'])
         ->name('weekly.edit');
+
+    Route::put('/weekly-updates/edit/{id}',
+        [WeeklyUpdateController::class, 'update'])
+        ->name('weekly.update');
+
+    Route::get('/weekly-updates/{id}', [WeeklyUpdateController::class, 'show'])
+        ->name('weekly.show');
 
     /*
     |--------------------------------------------------------------------------

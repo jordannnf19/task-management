@@ -813,6 +813,18 @@
         </div>
     </div>
     @endif
+    @if($errors->any())
+    <div class="toast app-toast toast-error-bar show" role="alert" aria-atomic="true">
+        <div class="d-flex align-items-start toast-body gap-3">
+            <i class="bi bi-exclamation-circle-fill text-danger fs-5 flex-shrink-0"></i>
+            <div>
+                <div>Please fill all required fields.</div>
+                <div style="font-size: 12px; color: var(--muted);">{{ $errors->first() }}</div>
+            </div>
+            <button type="button" class="btn-close ms-auto flex-shrink-0" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+    @endif
 </div>
 
 {{-- ===== MOBILE OVERLAY ===== --}}

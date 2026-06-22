@@ -40,7 +40,9 @@ class DashboardController extends Controller
             'user_id',
             Auth::id()
         )
-        ->latest()
+        ->selectRaw('DATE(created_at) as task_date, MIN(id) as first_id, COUNT(*) as task_count, SUM(hours_spent) as total_hours, MIN(created_at) as submitted_at')
+        ->groupByRaw('DATE(created_at)')
+        ->orderByDesc('task_date')
         ->paginate(10);
 
         return view(

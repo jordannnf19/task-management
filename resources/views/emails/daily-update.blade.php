@@ -1,5 +1,15 @@
 <h2>Daily Update Report</h2>
 
+<p>
+<b>Employee :</b>
+{{ $user?->name ?? 'Employee' }}
+</p>
+
+<p>
+<b>Email :</b>
+{{ $user?->email ?? 'N/A' }}
+</p>
+
 @if($tasks->count())
 
 @foreach($tasks as $task)
